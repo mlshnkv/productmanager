@@ -1,7 +1,7 @@
-package org.moloshnikov.productmanager.controller;
+package org.moloshnikov.productmanager.controller.order;
 
 public enum ArticleOrder {
-    ID("id"), // default
+    ID("id"),
     DATE("created"),
     NAME("name");
 

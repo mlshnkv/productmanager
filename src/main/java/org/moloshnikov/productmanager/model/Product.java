@@ -1,40 +1,21 @@
 package org.moloshnikov.productmanager.model;
 
-import com.fasterxml.jackson.annotation.*;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
 import java.util.List;
 
+@NamedEntityGraph(name = "product-entity-graph", attributeNodes = {@NamedAttributeNode("articles")})
 @Entity
 @Table(name = "product")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, scope = Product.class, property="name")
 public class Product extends AbstractBaseEntity {
 
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "price")
     private int price;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-//    @JsonManagedReference
-//    @JsonIdentityReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)//
     private List<Article> articles;
-
-    public Product(String description, int price, List<Article> articles) {
-        this.description = description;
-        this.price = price;
-        this.articles = articles;
-    }
-
-    public Product(Integer id, @NotBlank @Size(min = 2, max = 100) String name, String description, int price, List<Article> articles) {
-        super(id, name);
-        this.description = description;
-        this.price = price;
-        this.articles = articles;
-    }
 
     public Product() {
     }

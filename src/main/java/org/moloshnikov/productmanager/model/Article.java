@@ -1,41 +1,28 @@
 package org.moloshnikov.productmanager.model;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonView;
+import org.moloshnikov.productmanager.controller.View;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+@NamedEntityGraph(name = "article-entity-graph", attributeNodes = {@NamedAttributeNode("product")})
 @Entity
 @Table(name = "article")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, scope = Article.class, property="id")
 public class Article extends AbstractBaseEntity {
 
+    @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "created", updatable = false)
     private LocalDate created;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-   // @JsonIdentityReference
-//    @JsonBackReference
+    @JoinColumn(name = "product_id", nullable = false)
+    @JsonView(View.Internal.class)
     private Product product;
 
-
-    public Article(String content, LocalDate created, Product product) {
-        this.content = content;
-        this.created = created;
-        this.product = product;
-    }
-
-    public Article(Integer id, @NotBlank @Size(min = 2, max = 100) String name, String content, LocalDate created, Product product) {
-        super(id, name);
-        this.content = content;
-        this.created = created;
-        this.product = product;
-    }
-
     public Article() {
-
     }
 
     public String getContent() {

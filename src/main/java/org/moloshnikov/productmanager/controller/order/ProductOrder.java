@@ -1,7 +1,7 @@
-package org.moloshnikov.productmanager.controller;
+package org.moloshnikov.productmanager.controller.order;
 
 public enum ProductOrder {
-    ID("id"), // default
+    ID("id"),
     PRICE("price"),
     NAME("name");
 

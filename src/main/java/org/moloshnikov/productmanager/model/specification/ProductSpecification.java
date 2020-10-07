@@ -18,8 +18,8 @@ public class ProductSpecification {
     public static Specification<Product> productsByPrice(Integer min, Integer max) {
         return (r, q, cb) -> {
             if (min == null && max == null) return null;
-            if (min == null)                return cb.lessThanOrEqualTo(r.get("price"), max);
-            if (max == null)                return cb.greaterThanOrEqualTo(r.get("price"), min);
+            if (min == null) return cb.lessThanOrEqualTo(r.get("price"), max);
+            if (max == null) return cb.greaterThanOrEqualTo(r.get("price"), min);
             return cb.between(r.get("price"), min, max);
         };
     }

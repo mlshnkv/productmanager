@@ -10,7 +10,9 @@ import javax.validation.constraints.Size;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public abstract class AbstractBaseEntity {
     public static final int START_SEQ = 100000;
 
@@ -18,10 +20,9 @@ public abstract class AbstractBaseEntity {
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     @Column(name = "id", unique = true, nullable = false, columnDefinition = "integer default nextval('global_seq')")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
-    protected Integer id;
+    public Integer id;
 
     @NotBlank
-    @Size(min = 2, max = 100)
     @Column(name = "name", nullable = false)
     protected String name;
 
@@ -49,6 +50,10 @@ public abstract class AbstractBaseEntity {
         this.name = name;
     }
 
+    public boolean isNew() {
+        return id == null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -64,5 +69,12 @@ public abstract class AbstractBaseEntity {
     @Override
     public int hashCode() {
         return id == null ? 0 : id;
+    }
+
+    @Override
+    public String toString() {
+        return "id = " + id +
+                ", name = '" + name + '\'' +
+                '}';
     }
 }

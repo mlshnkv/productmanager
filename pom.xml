@@ -37,21 +37,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-
-<!--         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-json -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-json</artifactId>-->
-<!--            <version>2.3.4.RELEASE</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.4.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
