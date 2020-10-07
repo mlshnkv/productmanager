@@ -57,7 +57,7 @@
 
 ###### Get a list of articles
 
-curl --location --request GET 'http://localhost:8080/articles'
+`curl --location --request GET 'http://localhost:8080/articles'`
 
 ###### Create article
 
